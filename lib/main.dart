@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +27,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int decision = 1;
+
+  void makeDecision() {
+    setState(() {
+      decision = Random().nextInt(5) + 1;
+    });
+  }
+
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Decision Ball'),
+        ),
+        body: Center(
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: FlatButton(
+                  child: Image.asset('images/ball$decision.png'),
+                  onPressed: () {
+                    makeDecision();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.blue,
+      ),
+    );
+  }
 }
